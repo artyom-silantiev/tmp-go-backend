@@ -14,7 +14,7 @@ import (
 
 func main() {
 	cfg := config.GetConfig()
-	fmt.Println(cfg)
+	fmt.Println("Config: ", cfg)
 
 	r := createRouter()
 	r.Run(":" + strconv.Itoa(cfg.Port))
@@ -28,11 +28,14 @@ func createRouter() *gin.Engine {
 	router.GET("/ping", controllers.Ping)
 
 	// public root
-	fmt.Println("Public root: ", cfg.RootPublic)
-	router.Use(static.Serve("/", static.LocalFile(cfg.RootPublic, false)))
+	if cfg.RootPublic != "" {
+		fmt.Println("Public root: ", cfg.RootPublic)
+		router.Use(static.Serve("/", static.LocalFile(cfg.RootPublic, false)))
+	}
 
+	// frontend admin spa root
 	if cfg.RootFrontendAdminSpa != "" {
-		// frontend admin spa root
+		fmt.Println("Frontend admin spa root: ", cfg.RootPublic)
 		router.Use(static.Serve("/admin", static.LocalFile(cfg.RootFrontendAdminSpa, false)))
 		router.Use(func(c *gin.Context) {
 			if strings.HasPrefix(c.Request.URL.Path, "/admin") && c.Request.Method == "GET" {

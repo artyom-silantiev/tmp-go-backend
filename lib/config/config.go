@@ -31,7 +31,7 @@ func createConfig() *Config {
 
 		Port: getEnvAsInt("PORT", 3000),
 
-		RootPublic:           getEnv("ROOT_PUBLIC", "./public"),
+		RootPublic:           getEnv("ROOT_PUBLIC", ""),
 		RootFrontendSpa:      getEnv("ROOT_FRONTEND_SPA", ""),
 		RootFrontendAdminSpa: getEnv("ROOT_FRONTEND_ADMIN_SPA", ""),
 	}

@@ -1,1 +1,4 @@
 /public/
+/build/
+
+dev.run-app.sh
