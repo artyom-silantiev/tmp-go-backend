@@ -10,7 +10,7 @@ go install
 ```sh
 mkdir build
 ```
-## copy-paste run scripe and edit config
+## copy/paste app run script and view/edit config
 ```sh
 cp dev.run-app.default.sh dev.run-app.sh
 nano dev.run-app.sh # view, [edit,] save
