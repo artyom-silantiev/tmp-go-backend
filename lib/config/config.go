@@ -7,7 +7,7 @@ import (
 )
 
 type Config struct {
-	EnvironmentType string // developer | production
+	EnvironmentType string // development | production
 
 	Port int
 
@@ -27,7 +27,7 @@ func GetConfig() *Config {
 
 func createConfig() *Config {
 	config := &Config{
-		EnvironmentType: getEnv("ENV", "developer"),
+		EnvironmentType: getEnv("ENV", "development"),
 
 		Port: getEnvAsInt("PORT", 3000),
 

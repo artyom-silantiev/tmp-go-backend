@@ -1,6 +1,6 @@
 #!/usr/bin
 
-export ENV=developer
+export ENV=development
 export PORT=3000
 
 export ROOT_PUBLIC="$(pwd)/public"
