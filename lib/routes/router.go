@@ -2,7 +2,6 @@ package routes
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
@@ -11,35 +10,21 @@ import (
 	"github.com/artyom-silantiev/tmp-go-backend/lib/controllers"
 )
 
-func CreateRouter(cfg *config.Config) *gin.Engine {
+func CreateRouter(cfg config.Config) *gin.Engine {
 	router := gin.Default()
 
 	router.GET("/ping", controllers.Ping)
 
 	// public root
-	if cfg.ROOT_PUBLIC != "" {
-		fmt.Println("Public root: ", cfg.ROOT_PUBLIC)
-		router.Use(static.Serve("/", static.LocalFile(cfg.ROOT_PUBLIC, false)))
+	if cfg.DirHttpPublic != "" {
+		fmt.Println("Public root: ", cfg.DirHttpPublic)
+		router.Use(static.Serve("/", static.LocalFile(cfg.DirHttpPublic, true)))
 	}
 
-	// frontend admin spa root
-	if cfg.ROOT_FRONTEND_ADMIN_SPA != "" {
-		fmt.Println("Frontend admin spa root: ", cfg.ROOT_PUBLIC)
-		router.Use(static.Serve("/admin", static.LocalFile(cfg.ROOT_FRONTEND_ADMIN_SPA, false)))
-		router.Use(func(c *gin.Context) {
-			if strings.HasPrefix(c.Request.URL.Path, "/admin") && c.Request.Method == "GET" {
-				c.File(cfg.ROOT_FRONTEND_ADMIN_SPA + "index.html")
-			}
-		})
-	}
-
-	// frontend spa root
-	if cfg.ROOT_FRONTEND_SPA != "" {
-		fmt.Println("Frontend spa root: ", cfg.ROOT_PUBLIC)
-		router.Use(static.Serve("/", static.LocalFile(cfg.ROOT_FRONTEND_SPA, false)))
-		router.NoRoute(func(c *gin.Context) {
-			c.File(cfg.ROOT_FRONTEND_SPA + "index.html")
-		})
+	// admin app root
+	if cfg.DirHttpAdmin != "" {
+		fmt.Println("Admin app root: ", cfg.DirHttpAdmin)
+		router.Use(static.Serve("/admin", static.LocalFile(cfg.DirHttpAdmin, true)))
 	}
 
 	return router

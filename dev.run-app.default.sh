@@ -1,10 +1,7 @@
 #!/usr/bin
 
-export ENV=development
-export PORT=3000
-
-export ROOT_PUBLIC="$(pwd)/public"
-export ROOT_FRONTEND_SPA=""
-export ROOT_FRONTEND_ADMIN_SPA=""
+export APP_PORT=3000
+export APP_DIR_HTTP_PUBLIC="$(pwd)/public"
+export APP_DIR_HTTP_ADMIN=""
 
 ./build/app

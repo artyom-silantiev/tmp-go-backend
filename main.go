@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/artyom-silantiev/tmp-go-backend/lib/config"
@@ -10,8 +9,7 @@ import (
 
 func main() {
 	cfg := config.GetConfig()
-	fmt.Println("Config: ", cfg)
-
+	config.PrintConfig(cfg)
 	r := routes.CreateRouter(cfg)
-	r.Run(":" + strconv.Itoa(cfg.PORT))
+	r.Run(":" + strconv.Itoa(cfg.Port))
 }
