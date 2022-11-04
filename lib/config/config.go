@@ -7,13 +7,13 @@ import (
 )
 
 type Config struct {
-	EnvironmentType string // development | production
+	ENV string // development | production
 
-	Port int
+	PORT int
 
-	RootPublic           string
-	RootFrontendSpa      string
-	RootFrontendAdminSpa string
+	ROOT_PUBLIC             string
+	ROOT_FRONTEND_SPA       string
+	ROOT_FRONTEND_ADMIN_SPA string
 }
 
 var config *Config
@@ -27,13 +27,13 @@ func GetConfig() *Config {
 
 func createConfig() *Config {
 	config := &Config{
-		EnvironmentType: getEnv("ENV", "development"),
+		ENV: getEnv("ENV", "development"),
 
-		Port: getEnvAsInt("PORT", 3000),
+		PORT: getEnvAsInt("PORT", 3000),
 
-		RootPublic:           getEnv("ROOT_PUBLIC", ""),
-		RootFrontendSpa:      getEnv("ROOT_FRONTEND_SPA", ""),
-		RootFrontendAdminSpa: getEnv("ROOT_FRONTEND_ADMIN_SPA", ""),
+		ROOT_PUBLIC:             getEnv("ROOT_PUBLIC", ""),
+		ROOT_FRONTEND_SPA:       getEnv("ROOT_FRONTEND_SPA", ""),
+		ROOT_FRONTEND_ADMIN_SPA: getEnv("ROOT_FRONTEND_ADMIN_SPA", ""),
 	}
 	return config
 }

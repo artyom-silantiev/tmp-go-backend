@@ -13,5 +13,5 @@ func main() {
 	fmt.Println("Config: ", cfg)
 
 	r := routes.CreateRouter(cfg)
-	r.Run(":" + strconv.Itoa(cfg.Port))
+	r.Run(":" + strconv.Itoa(cfg.PORT))
 }
